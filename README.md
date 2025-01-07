@@ -1,48 +1,53 @@
-# Astro Starter Kit: Basics
+# AI Chatbot for Social Media Performance Analysis
 
-```sh
-npm create astro@latest -- --template basics
-```
+This project is a basic chatbot designed to analyze social media performance. It uses **LangFlow** for creating workflows, **Astra DB** for database operations, and integrates **React**, **TailwindCSS**, and **ShadCN components** for the frontend.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Setup Instructions
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Prerequisites
+- **Node.js** (>= 16.x)
+- **NPM** or **Yarn**
+- **Astra DB Account**
+- **LangFlow Installed**
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Steps
 
-## 🚀 Project Structure
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <project-folder>
+   ```
 
-Inside of your Astro project, you'll see the following folders and files:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+3. Set up environment variables:
+   Create a `.env` file and add:
+   ```env
+   ASTRA_DB_ID=<your-db-id>
+   ASTRA_DB_REGION=<your-region>
+   ASTRA_DB_KEYSPACE=<your-keyspace>
+   ASTRA_DB_APPLICATION_TOKEN=<your-app-token>
+   ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## 🧞 Commands
+   The app will be available at `http://localhost:4321`.
 
-All commands are run from the root of the project, from a terminal:
+## About the Chatbot
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The chatbot analyzes social media posts and engagement data. It provides insights like:
+- Which post types (carousel, reels, static images) perform better.
+- Engagement comparisons (e.g., likes, shares, comments).
 
-## 👀 Want to learn more?
+We used GPT in LangFlow to process the data and generate these insights. For example:
+- "Reels drive twice as many comments as static images."
+- "Carousel posts have 20% higher engagement than other formats."
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Let us know if you need help setting up or have any questions!
+
