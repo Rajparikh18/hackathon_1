@@ -39,13 +39,12 @@ class LangflowClient {
 // Initialize client outside the handler
 const langflowClient = new LangflowClient(
     'https://api.langflow.astra.datastax.com',
-    'AstraCS:ScCfkpFrZwljuriRxLCpFLAd:7cc1cacd4f3bf19208e7c2bb7da30f155cbfbef82f5781f67879c3b07f4b5662'
+    'AstraCS:pFhTjYYiDSUAzRnucAIWPpSA:411c05aae4d6e3ab030b5478214512c8a895c36a1a4fdeac88fcfa9a98b454b6'
 );
 
 export const POST: APIRoute = async ({ request }) => {
     try {
         console.log('Hello there from route');
-        console.log(request);
         const { message } = await request.json();
 
         if (!message) {
@@ -56,8 +55,8 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         const response = await langflowClient.runFlow(
-            '6ba1cf1f-f0be-40de-ba87-3dc0c6630c6c',
-            '22c0277d-7cf1-499a-bcef-6bd3be691afe',
+            'bf2fa8d0-4746-402e-a23d-4814e99b0345',
+            '63d336fa-2a2c-41aa-bd05-13e1d71b3694',
             message
         );
 
