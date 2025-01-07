@@ -10,5 +10,7 @@ import vercelServerless from '@astrojs/vercel/serverless';
 export default defineConfig({
   output:'server',
   adapter: vercelServerless(),
-  integrations: [tailwind(), react()]
+  integrations: [tailwind({
+    applyBaseStyles: false,
+  }), react()]
 });
