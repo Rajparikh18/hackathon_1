@@ -1,60 +1,38 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MessageCircle, Send } from 'lucide-react';
 import './chat.css';
 import axios from 'axios';
 
-function Chat({ apiRoute }) {
+
+function Chat() {
     const [message, setMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const messagesEndRef = useRef(null);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [chatHistory]);
 
     const handleChange = (event) => {
         setMessage(event.target.value);
     };
 
-    const sendMessage = async () => {
-        console.log("hello");
-        const trimmedMessage = message.trim();
-        
-        if (!trimmedMessage || !apiRoute) {
-            return;
-        }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (!message.trim()) return;
+
+        // Add user message to chat history
+        setChatHistory(prev => [...prev, { type: 'user', content: message }]);
+        console.log(chatHistory);
+        setIsLoading(true);
 
         try {
-            setChatHistory(prev => [...prev, { type: 'user', content: trimmedMessage }]);
-            setIsLoading(true);
-
-            const response = await axios.post(apiRoute, 
-                { message: trimmedMessage },
-                { 
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
-            
-            if (response.data && response.data.response) {
-                setChatHistory(prev => [...prev, { type: 'bot', content: response.data.response }]);
-            }
+            const response = await axios.post('/api/chat', { message });
+            console.log(response);
+            setChatHistory(prev => [...prev, { type: 'bot', content: response.data.response }]);
         } catch (error) {
-            console.error('Chat error:', error);
-            setChatHistory(prev => [...prev, { 
-                type: 'bot', 
-                content: 'Sorry, I encountered an error. Please try again.' 
-            }]);
-        } finally {
-            setIsLoading(false);
-            setMessage('');
+            console.error('Error:', error);
+            setChatHistory(prev => [...prev, { type: 'bot', content: 'Sorry, I encountered an error. Please try again.' }]);
         }
+
+        setIsLoading(false);
+        setMessage('');
     };
 
     return (
@@ -73,7 +51,7 @@ function Chat({ apiRoute }) {
                 )}
                 
                 {chatHistory.map((chat, index) => (
-                    <div key={`${index}-${chat.type}`} className={`message ${chat.type}-message`}>
+                    <div key={index} className={`message ${chat.type}-message`}>
                         <div className="message-content">
                             {chat.content}
                         </div>
@@ -89,10 +67,9 @@ function Chat({ apiRoute }) {
                         </div>
                     </div>
                 )}
-                <div ref={messagesEndRef} />
             </div>
 
-            <div className="chat-input-container">
+            <form onSubmit={handleSubmit} className="chat-input-form">
                 <input
                     type="text"
                     value={message}
@@ -100,13 +77,10 @@ function Chat({ apiRoute }) {
                     placeholder="Type your message here..."
                     className="chat-input"
                 />
-                <button 
-                    onClick={sendMessage}
-                    className="send-button"
-                >
+                <button type="submit" className="send-button" disabled={!message.trim() || isLoading}>
                     <Send size={20} />
                 </button>
-            </div>
+            </form>
         </div>
     );
 }

@@ -45,6 +45,7 @@ const langflowClient = new LangflowClient(
 export const POST: APIRoute = async ({ request }) => {
     try {
         console.log('Hello there from route');
+        console.log(request);
         const { message } = await request.json();
 
         if (!message) {
