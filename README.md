@@ -8,7 +8,6 @@ This project is a basic chatbot designed to analyze social media performance. It
 - **Node.js** (>= 16.x)
 - **NPM** or **Yarn**
 - **Astra DB Account**
-- **LangFlow Installed**
 
 ### Steps
 
@@ -28,7 +27,6 @@ This project is a basic chatbot designed to analyze social media performance. It
    ```env
    ASTRA_DB_ID=<your-db-id>
    ASTRA_DB_REGION=<your-region>
-   ASTRA_DB_KEYSPACE=<your-keyspace>
    ASTRA_DB_APPLICATION_TOKEN=<your-app-token>
    ```
 
